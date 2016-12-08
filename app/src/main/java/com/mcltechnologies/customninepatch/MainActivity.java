@@ -1,6 +1,7 @@
 package com.mcltechnologies.customninepatch;
 
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -23,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
         buttonTall = (Button) findViewById(R.id.button_tall);
 
         Bitmap bitmap = NinePatchBitmapFactory.getBitmapFromAsset(getApplicationContext(), "ninepatch.png");
-        buttonSmall.setBackground(NinePatchBitmapFactory.getNinePatchFromBitmap(getBaseContext(), bitmap));
-        buttonWide.setBackground(NinePatchBitmapFactory.getNinePatchFromBitmap(getBaseContext(), bitmap));
-        buttonTall.setBackground(NinePatchBitmapFactory.getNinePatchFromBitmap(getBaseContext(), bitmap));
+        Rect rect = new Rect(5,5,120,37);
+        buttonSmall.setBackground(NinePatchBitmapFactory.getNinePatchFromBitmap(getBaseContext(), bitmap, rect));
+        buttonWide.setBackground(NinePatchBitmapFactory.getNinePatchFromBitmap(getBaseContext(), bitmap, rect));
+        buttonTall.setBackground(NinePatchBitmapFactory.getNinePatchFromBitmap(getBaseContext(), bitmap, rect));
     }
 }

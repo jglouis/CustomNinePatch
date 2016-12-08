@@ -24,7 +24,7 @@ public class NinePatchBitmapFactory {
 
     private static final int NO_COLOR = 0x00000001;
 
-    public static NinePatchDrawable createNinePatchWithCapInsets(Resources res, Bitmap bitmap,
+    private static NinePatchDrawable createNinePatchWithCapInsets(Resources res, Bitmap bitmap,
                                                                  List<Range> rangeListX, List<Range> rangeListY , String srcName) {
         ByteBuffer buffer = getByteBuffer(rangeListX,rangeListY);
         return new NinePatchDrawable(res,bitmap, buffer.array(), new Rect(), srcName);
@@ -71,9 +71,9 @@ public class NinePatchBitmapFactory {
         return buffer;
     }
 
-    public static NinePatchDrawable getNinePatchFromBitmap(Context context, Bitmap bitmap) {
-        final Range rangeX = new Range(5, 120);
-        final Range rangeY = new Range(5, 37);
+    public static NinePatchDrawable getNinePatchFromBitmap(Context context, Bitmap bitmap, Rect stretchableArea) {
+        final Range rangeX = new Range(stretchableArea.left, stretchableArea.right);
+        final Range rangeY = new Range(stretchableArea.top, stretchableArea.bottom);
 
         return createNinePatchWithCapInsets(
                 context.getResources(),
@@ -98,11 +98,11 @@ public class NinePatchBitmapFactory {
     }
 
 
-    public static class Range {
+    private static class Range {
         private int start;
         private int end;
 
-        public Range(int start, int end){
+        Range(int start, int end){
             this.start = start;
             this.end = end;
         }
